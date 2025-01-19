@@ -19,7 +19,7 @@ class Monster extends Game
 {
     public function attack($charater)
     {
-        if ($charater->hp > 0 || $charater > 100) {
+        if ($charater->hp > 0 && $charater->hp > 100) {
             $charater->hp -= 100;
         } else {
             $charater->hp = 0;
@@ -28,7 +28,7 @@ class Monster extends Game
 
     public function skillAttack($charater)
     {
-        if ($charater->hp > 0 || $charater >= 500) {
+        if ($charater->hp > 0 && $charater->hp >= 500) {
             $charater->hp -= 500;
         } else {
             $charater->hp = 0;
@@ -50,7 +50,7 @@ class Character extends Game
     public function attack($monster)
     {
         $att = 1000 * $this->level;
-        if ($monster->hp > 0 || $monster->hp >= $att) {
+        if ($monster->hp > 0 && $monster->hp >= $att) {
             $monster->hp -= $att;
         } else {
             $monster->hp = 0;
