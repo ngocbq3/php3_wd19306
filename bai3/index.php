@@ -1,14 +1,15 @@
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/app/helpers/handler.php";
+
 $url = $_GET['url'] ?? '';
 
+use App\Controllers\HomeController;
 use Phroute\Phroute\RouteCollector;
 
 $router = new RouteCollector();
 
-$router->get('/', function () {
-    return "HOME PAGE";
-});
+$router->get('/', [HomeController::class, 'index']);
 $router->get('/about', function () {
     return "ABOUT US";
 });

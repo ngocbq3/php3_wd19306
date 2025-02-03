@@ -1,5 +1,6 @@
 {
   "name": "bqngo/bai3",
+  "version": "1.0.0",
   "type": "mvc",
   "authors": [
     {
@@ -8,7 +9,8 @@
     }
   ],
   "require": {
-    "phroute/phroute": "^2.2"
+    "phroute/phroute": "^2.2",
+    "eftec/bladeone": "^4.17"
   },
   "autoload": {
     "psr-4": {
