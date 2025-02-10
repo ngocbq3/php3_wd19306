@@ -12,3 +12,12 @@ function view($pathView, $data = [])
 
     return $blade->run($pathView, $data);
 }
+
+//Hàm dd để debug
+function dd($data)
+{
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+    die;
+}
