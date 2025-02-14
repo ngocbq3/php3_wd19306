@@ -33,8 +33,16 @@ class HomeController
 
         // dd(Post::find(21));
 
+        // dd(
+        //     Post::where('title', 'LIKE', '%Quốc%')
+        //         ->andWhere('category_id', '=', 2)
+        //         ->get()
+        // );
+
         dd(
-            Post::where('title', 'LIKE', '%Quốc%')->get()
+            Post::select(['posts.*', 'name'])
+                ->join('posts', 'categories', 'category_id', 'id')
+                ->get()
         );
     }
 }

@@ -9,7 +9,7 @@ class BaseModel
     protected $conn = null;
     protected $tableName = null;
     protected $primaryKey = 'id';
-    protected $sqlBuilder;
+    protected $sqlBuilder = null;
     public function __construct()
     {
         try {
@@ -106,7 +106,12 @@ class BaseModel
     public static function where($column, $operator, $value)
     {
         $model = new static;
-        $model->sqlBuilder = "SELECT * FROM $model->tableName WHERE `$column` $operator '$value'";
+        if ($model->sqlBuilder == null) {
+            $model->sqlBuilder = "SELECT * FROM $model->tableName WHERE `$column` $operator '$value'";
+        } else {
+            $model->sqlBuilder .= " WHERE `$column` $operator '$value' ";
+        }
+
         return $model;
     }
 
@@ -118,5 +123,66 @@ class BaseModel
         $stmt = $this->conn->prepare($this->sqlBuilder);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    /**
+     * @method first: lấy ra phần tử đầu tiên
+     */
+    public function first()
+    {
+        $stmt = $this->conn->prepare($this->sqlBuilder);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS)[0] ?? [];
+    }
+
+    /**
+     * @method andWhere: Phương kết hợp với where thêm điều AND
+     * @param $column: tên cột làm điều kiện
+     * @param $operator: biểu thức điều kiện
+     * @param $value: giá trị
+     */
+    public function andWhere($column, $operator, $value)
+    {
+        $this->sqlBuilder .= " AND `$column` $operator '$value'";
+        return $this;
+    }
+    /**
+     * @method orWhere: Phương kết hợp với where thêm điều OR
+     * @param $column: tên cột làm điều kiện
+     * @param $operator: biểu thức điều kiện
+     * @param $value: giá trị
+     */
+    public function orWhere($column, $operator, $value)
+    {
+        $this->sqlBuilder .= " OR `$column` $operator '$value'";
+        return $this;
+    }
+
+    /**
+     * @method select: phương thức lấy dữ liệu theo lựa chọn cột cần lấy
+     */
+    public static function select($columns = ['*'])
+    {
+        $model = new static;
+        $model->sqlBuilder = "SELECT ";
+        foreach ($columns as $col) {
+            $model->sqlBuilder .= " $col, ";
+        }
+        $model->sqlBuilder = rtrim($model->sqlBuilder, ", ") . " FROM $model->tableName ";
+        return $model;
+    }
+
+    /**
+     * @method join: phương thức dùng để nối 2 bảng
+     * @param $table1: bảng 1 là bảng hiện tại đang chọn
+     * @param $table2: bảng 2 là bảng nối
+     * @param $reference: khóa ngoại
+     * @param $primary: Khóa chính
+     */
+    public function join($table1, $table2, $reference, $primary)
+    {
+        $this->sqlBuilder .= " JOIN $table2 ON $table1.$reference = $table2.$primary ";
+        // dd($this->sqlBuilder);
+        return $this;
     }
 }
