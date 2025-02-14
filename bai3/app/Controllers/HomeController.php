@@ -17,15 +17,24 @@ class HomeController
     public function test()
     {
         //Dữ liệu bảng posts
-        // $data = [
-        //     'title' => 'test 1',
-        //     'description' => 'mô tả',
-        //     'image' => 'anh.jpg',
-        //     'content' => 'nội dung 1',
-        //     'category_id' => 1
-        // ];
+        $data = [
+            'title' => 'Update test 1',
+            'description' => 'Update mô tả',
+            'image' => 'anh.jpg',
+            'content' => 'nội dung 1',
+            'category_id' => 1,
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
         // Post::create($data);
 
-        Post::delete(1);
+        // Post::delete(1);
+
+        // Post::update($data, 2);
+
+        // dd(Post::find(21));
+
+        dd(
+            Post::where('title', 'LIKE', '%Quốc%')->get()
+        );
     }
 }
