@@ -21,3 +21,10 @@ function dd($data)
     echo "</pre>";
     die;
 }
+//Chuyển hướng website
+function redirect($path)
+{
+    $path = APP_URL . $path;
+    header("location: $path");
+    die;
+}
