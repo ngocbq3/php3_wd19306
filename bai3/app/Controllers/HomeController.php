@@ -14,6 +14,7 @@ class HomeController
         return view('home');
     }
 
+
     public function test()
     {
         //Dữ liệu bảng posts

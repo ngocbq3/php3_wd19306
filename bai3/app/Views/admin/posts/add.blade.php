@@ -32,8 +32,8 @@
                 <textarea name="content" class="form-control" rows="10"></textarea>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn-btn-primary">Create New</button>
-                <a href="{{ APP_URL . 'admin/posts' }}" class="btn-btn-primary">List Post</a>
+                <button type="submit" class="btn btn-primary">Create New</button>
+                <a href="{{ APP_URL . 'admin/posts' }}" class="btn btn-primary">List Post</a>
             </div>
         </form>
     </div>
