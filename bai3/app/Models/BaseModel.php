@@ -12,13 +12,18 @@ class BaseModel
     protected $sqlBuilder = null;
     public function __construct()
     {
+        $host = HOST;
+        $dbname = DBNAME;
+        $username = USERNAME;
+        $password = PASSWORD;
+        $port = PORT;
         try {
-            $this->conn = new \PDO("mysql:host=localhost; dbname=php2_wd19306; charset=utf8; port=3306", "root", "");
+            $this->conn = new \PDO("mysql:host=$host; dbname=$dbname; charset=utf8; port=$port", $username, $password);
         } catch (\PDOException $e) {
             echo "Lỗi kết nối CSDL: " . $e->getMessage();
         }
     }
-
+    //Lấy toàn bộ
     public static function all()
     {
         $model = new static;

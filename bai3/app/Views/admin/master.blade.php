@@ -12,7 +12,11 @@
 <body>
     <div class="container">
         <header>
-            <nav>Menu Admin</nav>
+            <nav>Menu Admin
+
+                <strong>{{ $_SESSION['user']->username ?? '' }}</strong>
+                <a href="{{ APP_URL . 'logout' }}">Logout</a>
+            </nav>
         </header>
         <main>
             @yield('content')

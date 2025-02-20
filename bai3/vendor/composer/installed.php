@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'bqngo/bai3',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'c53bfeb4d9897bdeb8ad7bf6b9b69f1cb458fcf2',
+        'pretty_version' => '1.0.0',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'mvc',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'bqngo/bai3' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'c53bfeb4d9897bdeb8ad7bf6b9b69f1cb458fcf2',
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'mvc',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
