@@ -49,4 +49,41 @@ class PostController
         //Chuyển hướng sang danh sách
         return redirect('admin/posts');
     }
+
+    //edit
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
+    }
+    //update
+    public function update($id)
+    {
+        //lấy bài viết cũ
+        $post = Post::find($id);
+        //Lấy dữ liệu mới
+        $data = $_POST;
+
+        $file = $_FILES['image'];
+
+        if ($file['size'] > 0) {
+            $image = "images/" . $file['name'];
+            move_uploaded_file($file['tmp_name'], $image);
+            $data['image'] = $image;
+        }
+
+        //Xóa ảnh
+        if ($file['size'] > 0) {
+            if (file_exists($post->image) && $image != $post->image) {
+                unlink($post->image);
+            }
+        }
+        Post::update($data, $id);
+
+        $message = "Cập nhật dữ liệu thành công";
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'message'));
+    }
 }
