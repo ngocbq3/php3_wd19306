@@ -182,15 +182,20 @@ class BaseModel
 
     /**
      * @method join: phương thức dùng để nối 2 bảng
-     * @param $table1: bảng 1 là bảng hiện tại đang chọn
-     * @param $table2: bảng 2 là bảng nối
-     * @param $reference: khóa ngoại
-     * @param $primary: Khóa chính
+     * @param $table: Bảng để nối với bảng hiện tại
+     * @param $first: Tham số điều kiện thứ nhất
+     * @param $second: Tham số điều kiện thứ 2
      */
-    public function join($table1, $table2, $reference, $primary)
+    public function join($table, $first, $second)
     {
-        $this->sqlBuilder .= " JOIN $table2 ON $table1.$reference = $table2.$primary ";
+        $this->sqlBuilder .= " JOIN $table ON $first = $second ";
         // dd($this->sqlBuilder);
+        return $this;
+    }
+
+    public function orderBy($column, $by = 'ASC')
+    {
+        $this->sqlBuilder .= " ORDER BY $column $by";
         return $this;
     }
 }
